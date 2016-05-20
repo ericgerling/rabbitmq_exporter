@@ -2,7 +2,7 @@ package main
 
 var (
 	Version   string
-    Revision  string
+	Revision  string
 	Branch    string
 	BuildDate string
 )

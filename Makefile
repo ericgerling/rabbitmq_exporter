@@ -53,7 +53,7 @@ tarballs: promu
 	@echo ">> building crossbuild tarballs"
 	@$(PROMU) crossbuild tarballs 
 	
-docker:
+docker: build
 	@echo ">> building docker image"
 	@docker build -t "$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)" .
 
@@ -62,7 +62,4 @@ promu:
 	        GOARCH=$(subst x86_64,amd64,$(patsubst i%86,386,$(shell uname -m))) \
 	        $(GO) get -v github.com/prometheus/promu
 
-scratch:
-	CGO_ENABLED=0 GOOS=linux $(GO) build -a -installsuffix cgo -o $(TARGET)_static && docker build -f Dockerfile.scratch -t $(TARGET):scratch .
-	
-.PHONY: all style format build test vet tarball docker promu scratc
+.PHONY: all style format build test vet tarball tarballs docker promu
