@@ -35,7 +35,7 @@ after_success:
   
 #Build dist releases 
   - make tarballs
-  - promu release
+  - promu release -v
   
 #Submit coverage
   - goveralls -coverprofile=coverage.out -service travis-ci -repotoken $COVERALLS_TOKEN
