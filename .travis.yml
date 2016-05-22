@@ -18,7 +18,7 @@ before_install:
   - go get github.com/axw/gocov/gocov
   - go get github.com/mattn/goveralls
   - go get golang.org/x/tools/cmd/cover
-  - sudo curl -L 'https://github.com/aktau/github-release/releases/download/v0.6.2/linux-amd64-github-release.tar.bz2' | tar xvjf - --strip-components 3 -C $HOME/bin
+  - go get github.com/aktau/github-release
 
 install:
   - go get -t ./...
