@@ -40,10 +40,14 @@ func checkMap(flMap map[string]float64, t *testing.T, addValue float64) {
 	if v, ok := flMap["st"]; ok {
 		t.Errorf("key 'st' should not be included in map as it contains a string. Value: %v", v)
 	}
+
+	if v := flMap["ListKey"]; v != 2 {
+		t.Errorf("Map should contain ListKey with length of 2 but found '%v'", v)
+	}
 }
 
 func TestMakeMap(t *testing.T) {
-	jsonObject := strings.NewReader(`{"FloatKey":4, "st":"string","nes":{"ted":5}}`)
+	jsonObject := strings.NewReader(`{"FloatKey":4, "st":"string","nes":{"ted":5}, "ListKey":["first", "second"]}}`)
 	decoder := json.NewDecoder(jsonObject)
 
 	flMap := MakeMap(decoder)
@@ -51,7 +55,7 @@ func TestMakeMap(t *testing.T) {
 }
 
 func TestMakeQueueMap(t *testing.T) {
-	jsonArray := strings.NewReader(`[{"name":"q1", "FloatKey":14,"nes":{"ted":15}},{"name":"q2", "FloatKey":24,"nes":{"ted":25}}]`)
+	jsonArray := strings.NewReader(`[{"name":"q1", "FloatKey":14,"nes":{"ted":15}, "ListKey":["first", "second"]},{"name":"q2", "FloatKey":24, "nes":{"ted":25}, "ListKey": ["first", "second"]}]`)
 	decoder := json.NewDecoder(jsonArray)
 
 	qmap := MakeQueueMap(decoder)

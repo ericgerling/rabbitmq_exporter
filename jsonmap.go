@@ -66,6 +66,8 @@ func addFields(toMap *MetricMap, basename string, source map[string]interface{})
 			(*toMap)[prefix+k] = value
 		case map[string]interface{}:
 			addFields(toMap, prefix+k, value)
+		case []interface{}:
+			(*toMap)[prefix+k] = float64(len(value))
 		}
 	}
 }
