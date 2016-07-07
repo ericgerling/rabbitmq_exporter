@@ -6,7 +6,7 @@ dependencies:
   override:
     - go get github.com/prometheus/client_golang/prometheus
     - go get github.com/Sirupsen/logrus
-    - go build --ldflags '-extldflags "-static"' -o rabbitmq_exporter_static
+    - export CGO_ENABLED=0; go build --ldflags '-extldflags "-static"' -o rabbitmq_exporter_static
     - docker build -t ericgerling/rabbitmq-exporter -f Dockerfile.custom .
 
 deployment:
